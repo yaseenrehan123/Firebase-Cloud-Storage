@@ -1,3 +1,4 @@
+import { uploadThingFileRouter } from "@/app/api/uploadthing/core";
 import uploadFormSchema from "@/schemas/uploadFormSchema";
 import z from "zod";
 //SHADCN COMPONENTS
@@ -22,3 +23,5 @@ export type MessageProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 //SCHEMAS
 export type UploadFormFields = z.infer<typeof uploadFormSchema>
+//GENERAL
+export type UploadThingFileRouter = typeof uploadThingFileRouter;

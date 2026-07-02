@@ -11,16 +11,33 @@ import Message from '@/components/ui/general/message'
 import { MdAddCircleOutline } from "react-icons/md";
 import { useMutation } from '@tanstack/react-query';
 import Button from '@/components/ui/general/button';
+import { useUploadThing } from '@/libs/uploadThing';
 const UploadForm = () => {
+    const { startUpload } = useUploadThing("imageUploader", {
+        onUploadError: (err) => {
+            console.error("🔴 UploadThing Error Detail:", err.message);
+            console.error("🔴 Full Error Object:", err);
+        }
+    });
     const { register, reset, handleSubmit, formState: { errors } } = useForm<UploadFormFields>({
         resolver: zodResolver(uploadFormSchema)
     });
     const { isPending, isSuccess, isError, error, mutateAsync } = useMutation({
         mutationKey: ["uploadForm"],
-        mutationFn: async () => { }
+        mutationFn: async ({ caption, file }: UploadFormFields) => {
+            const filesToUpload = Array.from(file);
+            const res = await startUpload(filesToUpload);
+            if (!res) {
+                throw new Error("Cloud Upload Failed!")
+            }
+            const fileUrl = res[0].ufsUrl;
+            console.log("FILE URL: ", fileUrl, "CAPTION: ", caption)
+            return { fileUrl, caption }
+        }
     });
-    const onFormSubmitted = async () => {
-        await mutateAsync();
+    const onFormSubmitted = async (data: UploadFormFields) => {
+        await mutateAsync(data);
+        await reset();
     }
     return (
         <FormContainer variant='dark' className='text-white' onSubmit={handleSubmit(onFormSubmitted)}>
@@ -39,7 +56,7 @@ const UploadForm = () => {
                         hover:cursor-pointer hover:scale-99 active:scale-98 hover:opacity-50 transition-all duration-150'>
                             <MdAddCircleOutline className='absolute top-1/2 left-1/2 -translate-1/2 text-blue-500 text-4xl' />
                             <FormField type="file" accept='image/*' variant="default" bg="light" {...register("file")}
-                                className='w-full h-full hidden' />
+                                className='w-full h-full' />
                         </label>
 
                     </Alignment>

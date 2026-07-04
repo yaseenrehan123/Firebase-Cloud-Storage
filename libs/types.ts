@@ -1,5 +1,9 @@
 import { uploadThingFileRouter } from "@/app/api/uploadthing/core";
+import createUserSchema from "@/schemas/createUserSchema";
+import loginSchema from "@/schemas/loginSchema";
+import signUpSchema from "@/schemas/signupSchema";
 import uploadFormSchema from "@/schemas/uploadFormSchema";
+import verificationSchema from "@/schemas/verificationSchema";
 import z from "zod";
 //SHADCN COMPONENTS
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -21,7 +25,11 @@ export type MessageProps = React.HTMLAttributes<HTMLDivElement> & {
     disableOnContent?: 'never' | 'sm' | 'md' | 'lg',
     content?: String
 }
-//SCHEMAS
+//INFERS
 export type UploadFormFields = z.infer<typeof uploadFormSchema>
+export type SignUpFields = z.infer<typeof signUpSchema>
+export type VerificationFields = z.infer<typeof verificationSchema>
+export type LoginFields = z.infer<typeof loginSchema>
+export type CreateUserFields = z.infer<typeof createUserSchema>
 //GENERAL
 export type UploadThingFileRouter = typeof uploadThingFileRouter;

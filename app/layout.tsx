@@ -31,6 +31,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ProvidersContainer>
           {children}
+          <div id="clerk-captcha" />
         </ProvidersContainer>
       </body>
     </html>

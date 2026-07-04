@@ -67,8 +67,11 @@ const UploadForm = () => {
             </div>
             <Alignment variant='colCenter' gap='lg' className='w-full'>
                 <Alignment variant='colLeft' className='w-full'>
-                    <FormField type='text' variant="default" bg="light" {...register("caption")}
-                        placeholder='Caption' />
+                    <Alignment variant='colCenter' className='w-full'>
+                        <FormField type='text' variant="default" bg="light" {...register("caption")}
+                            placeholder='Caption' />
+                    </Alignment>
+
                     {errors.caption && <Message variant='error' disableOnContent="never" content={errors.caption.message} />}
                 </Alignment>
                 <Alignment variant='colLeft' className='w-full'>

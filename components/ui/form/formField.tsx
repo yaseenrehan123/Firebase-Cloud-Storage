@@ -12,9 +12,9 @@ const FormField = ({ variant, bg, className, ...props }: FormFieldProps) => {
 const variants = cva('text-center rounded-[8px] h-8 focus:outline-2 outline-neutral-400 w-full', {
     variants: {
         variant: {
-            default: 'max-w-xs',
-            small: 'max-w-sm',
-            large: 'max-w-lg'
+            default: 'w-[clamp(3.5rem,50vw,20rem)]',
+            small: 'w-[clamp(2rem,40vw,16rem)]',
+            large: 'w-[clamp(3.5rem,75vw,28rem)]'
         },
         bg: {
             light: 'bg-white text-black',

@@ -12,6 +12,8 @@ import Message from "@/components/ui/general/message";
 import Button from "@/components/ui/general/button";
 import FormField from "@/components/ui/form/formField";
 import FormContainer from "@/components/ui/form/formContainer";
+import Link from "next/link";
+import OAuthContainer from "@/features/general/OAuthContainer";
 
 const LoginForm = () => {
     const { signIn, fetchStatus } = useSignIn();
@@ -117,8 +119,18 @@ const LoginForm = () => {
                 </div>
             </Button>
 
+            <OAuthContainer />
 
             <Message variant={isError ? "error" : "success"} content={message} disableOnContent="md" />
+
+            <div className="text-white flex items-center justify-center gap-2">
+                <div>Dont have an account?</div>
+                <strong className="text-purple-500">
+                    <Link href={"/auth/signup"}>
+                        Signup
+                    </Link>
+                </strong>
+            </div>
         </FormContainer>
     );
 };

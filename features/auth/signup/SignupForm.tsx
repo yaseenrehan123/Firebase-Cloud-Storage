@@ -16,6 +16,8 @@ import Button from "@/components/ui/general/button";
 import FormField from "@/components/ui/form/formField";
 import FormContainer from "@/components/ui/form/formContainer";
 import Alignment from "@/components/ui/general/alignment";
+import Link from "next/link";
+import OAuthContainer from "@/features/general/OAuthContainer";
 //import { Text, TextInput, TouchableOpacity, div } from "react-native";
 const SignUpForm = () => {
     const { signUp, fetchStatus } = useSignUp();
@@ -77,7 +79,7 @@ const SignUpForm = () => {
             setMessage("Success!");
             setIsError(false);
             console.log("SIGN UP SUCCESSFULL!")
-            router.replace('/verify')
+            router.replace('/auth/verify')
         }
         catch (err: any) {
             console.error("DEBUG ERROR:", err)
@@ -121,8 +123,18 @@ const SignUpForm = () => {
                 </div>
             </Button>
 
+            <OAuthContainer />
+
             <Message variant={isError ? "error" : "success"} content={message} disableOnContent="md" />
-            {/*<OAuthButton title="Sign Up With Google" strategy="oauth_google" />*/}
+
+            <div className="text-white flex items-center justify-center gap-2">
+                <div>Already have an account?</div>
+                <strong className="text-purple-500">
+                    <Link href={"/auth/login"}>
+                        Login
+                    </Link>
+                </strong>
+            </div>
         </FormContainer >
     )
 }

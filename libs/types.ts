@@ -4,6 +4,8 @@ import loginSchema from "@/schemas/loginSchema";
 import signUpSchema from "@/schemas/signupSchema";
 import uploadFormSchema from "@/schemas/uploadFormSchema";
 import verificationSchema from "@/schemas/verificationSchema";
+import { LinkProps } from "next/link";
+import type { OAuthStrategy } from "@clerk/shared/types"
 import z from "zod";
 //SHADCN COMPONENTS
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -25,6 +27,24 @@ export type MessageProps = React.HTMLAttributes<HTMLDivElement> & {
     disableOnContent?: 'never' | 'sm' | 'md' | 'lg',
     content?: String
 }
+export type NavlinkProps = React.HTMLAttributes<HTMLDivElement> & Partial<LinkProps> & {
+    variant?: 'mainbar' | 'sidebar',
+    navigateRoute?: boolean
+}
+export type ResponsiveProps = React.HTMLAttributes<HTMLDivElement> & ResponsiveVariants;
+export type ProfileAvatarProps = React.HTMLAttributes<HTMLDivElement> & {
+    variant?: 'sidebar' | 'mainbar',
+    username?: string,
+    avatarUrl?: string,
+}
+export type ColumnDividerProps = React.HTMLAttributes<HTMLDivElement> & {
+    variant?: 'thin' | 'medium' | 'thick'
+}
+//COMPONENT PROPS
+export type OAuthButtonProps = {
+    title: string
+    strategy: OAuthStrategy
+}
 //INFERS
 export type UploadFormFields = z.infer<typeof uploadFormSchema>
 export type SignUpFields = z.infer<typeof signUpSchema>
@@ -33,3 +53,18 @@ export type LoginFields = z.infer<typeof loginSchema>
 export type CreateUserFields = z.infer<typeof createUserSchema>
 //GENERAL
 export type UploadThingFileRouter = typeof uploadThingFileRouter;
+export type ResponsiveVariants = {
+    display?: 'block' | 'inline' | 'inlineBlock' | 'flex' | 'inlineFlex' | 'grid' | 'hidden',
+    sm?: 'default' | 'block' | 'hidden' | 'flex' | 'inlineBlock',
+    md?: 'default' | 'block' | 'hidden' | 'flex' | 'inlineBlock',
+    lg?: 'default' | 'block' | 'hidden' | 'flex' | 'inlineBlock',
+}
+//STORES
+export type SidebarStore = {
+    enabled: boolean,
+    setEnabled: (newVal: boolean) => void
+}
+export type DeleteAccountConfirmationStore = {
+    enabled: boolean,
+    setEnabled: (val: boolean) => void
+}

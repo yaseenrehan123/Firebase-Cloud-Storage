@@ -1,12 +1,12 @@
 import React from 'react'
-import UploadSection from "@/features/upload/UploadSection";
+import SignupSection from '@/features/auth/signup/SignupSection';
 import PageContainer from '@/features/general/PageContainer';
-const UploadPage = () => {
+const SignupPage = () => {
     return (
         <PageContainer>
-            <UploadSection />
+            <SignupSection />
         </PageContainer>
     )
 }
 
-export default UploadPage
+export default SignupPage

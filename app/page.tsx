@@ -1,12 +1,11 @@
-import UploadFormSection from "@/features/upload/UploadFormSection";
+import PageContainer from "@/features/general/PageContainer";
+import UploadSection from "@/features/upload/UploadSection";
 
 
 export default function Home() {
   return (
-    <div className="w-screen h-screen bg-neutral-900 pt-3">
-      <div className="flex items-center flex-col">
-        Home
-      </div>
-    </div>
+    <PageContainer>
+      Home
+    </PageContainer>
   );
 }

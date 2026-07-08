@@ -7,6 +7,7 @@ import verificationSchema from "@/schemas/verificationSchema";
 import { LinkProps } from "next/link";
 import type { OAuthStrategy } from "@clerk/shared/types"
 import z from "zod";
+import createPostSchema from "@/schemas/createPostSchema";
 //SHADCN COMPONENTS
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: 'default' | 'outline'
@@ -51,6 +52,7 @@ export type SignUpFields = z.infer<typeof signUpSchema>
 export type VerificationFields = z.infer<typeof verificationSchema>
 export type LoginFields = z.infer<typeof loginSchema>
 export type CreateUserFields = z.infer<typeof createUserSchema>
+export type CreatePostFields = z.infer<typeof createPostSchema>
 //GENERAL
 export type UploadThingFileRouter = typeof uploadThingFileRouter;
 export type ResponsiveVariants = {

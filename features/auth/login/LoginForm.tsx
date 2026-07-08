@@ -38,7 +38,7 @@ const LoginForm = () => {
         }
 
         try {
-            // In Next.js, Clerk's signIn.create returns a sign-in attempt resource directly
+
             const { error } = await signIn.create({
                 identifier: email,
                 password: password,
@@ -51,7 +51,7 @@ const LoginForm = () => {
                     return;
                 }
                 else {
-                    // Handle non-Clerk errors (network issues, etc.)
+
                     console.error("An unexpected error occurred", error);
                 }
             }
@@ -63,10 +63,10 @@ const LoginForm = () => {
                 setMessage("Success!");
                 setIsError(false);
 
-                // Redirect user to dashboard or home page
+
                 router.replace("/");
             } else {
-                // Handle second factor (MFA) requirements if necessary
+
                 console.error("Sign-in status incomplete:", signIn.status);
                 setMessage(`Sign-in incomplete status: ${signIn.status}`);
                 setIsError(true);

@@ -14,7 +14,10 @@ import Button from '@/components/ui/general/button';
 import { useUploadThing } from '@/libs/uploadThing';
 import Image from 'next/image';
 import { RxCross2 } from "react-icons/rx";
+import { createPost } from '@/actions/postActions';
+import { useUser } from '@clerk/nextjs';
 const UploadForm = () => {
+    const { user } = useUser();
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const { startUpload } = useUploadThing("imageUploader", {
         onUploadError: (err) => {
@@ -36,6 +39,12 @@ const UploadForm = () => {
             }
             const fileUrl = res[0].ufsUrl;
             console.log("FILE URL: ", fileUrl, "CAPTION: ", caption)
+            await createPost({
+                caption: caption,
+                fileUrl: fileUrl,
+                userClerkId: user!.id
+
+            });
             return { fileUrl, caption }
         }
     });

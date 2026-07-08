@@ -14,8 +14,28 @@ datasource db {
 
 model User {
   clerkId   String   @id
-  username  String
+  username  String   @unique
   email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  posts     Post[]
+  likes     Like[]
+}
+
+model Post {
+  id          String @id @default(uuid())
+  caption     String
+  userClerkId String
+  fileUrl     String @unique
+  user        User   @relation(fields: [userClerkId], references: [clerkId])
+  likes       Like[]
+}
+
+model Like {
+  userClerkId String
+  postId      String
+  user        User   @relation(fields: [userClerkId], references: [clerkId], onDelete: Cascade)
+  post        Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@id([userClerkId, postId])
 }

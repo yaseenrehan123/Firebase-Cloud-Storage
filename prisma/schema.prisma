@@ -27,7 +27,7 @@ model Post {
   caption     String
   userClerkId String
   fileUrl     String @unique
-  user        User   @relation(fields: [userClerkId], references: [clerkId])
+  user        User   @relation(fields: [userClerkId], references: [clerkId], onDelete: Cascade)
   likes       Like[]
 }
 

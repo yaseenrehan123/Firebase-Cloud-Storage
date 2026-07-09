@@ -17,10 +17,11 @@ import { useRouter } from 'next/navigation';
 import { MdDelete } from "react-icons/md";
 //import { signOut } from 'next-auth/react';
 import useDeleteAccountConfirmationStore from '@/stores/useDeleteAccountConfirmationStore';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth, useClerk } from '@clerk/nextjs';
 //import useLogout from '@/hooks/useLogout';
 const Sidebar = () => {
     const { userId } = useAuth();
+    const { signOut } = useClerk();
     const enabled = useSidebarStore((state) => state.enabled);
     const loggedIn = !!userId
     const setEnabled = useDeleteAccountConfirmationStore((state) => state.setEnabled);
@@ -35,9 +36,9 @@ const Sidebar = () => {
             return;
         }
         console.log("LOGOUT!");
-        /*await signOut({
-            callbackUrl: "/"
-        });*/
+        await signOut({
+            redirectUrl: "/"
+        });
     }
 
     const onDeleteAccountButton = () => {
@@ -62,8 +63,8 @@ const Sidebar = () => {
                             <Navlink variant='sidebar' onClick={(e) => onSignButton(e)} navigateRoute={false}>
                                 <FaSignInAlt /> {!loggedIn ? 'Sign In' : 'Sign Out'}
                             </Navlink>
-                            <Navlink variant='sidebar' href={'/profile'}>
-                                <RiAccountCircleLine /> Profile
+                            <Navlink variant='sidebar' href={'/upload'}>
+                                <RiAccountCircleLine /> Upload
                             </Navlink>
                             <ColumnDivider variant='thin' />
                             <Navlink variant='sidebar' href={'/'}>

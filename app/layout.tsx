@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ProvidersContainer from "@/features/providers/ProvidersContainer";
 import Navbar from "@/features/navbar/Navbar";
+import DeleteAccountConfirmation from "@/features/auth/delete-account/DeleteAccountConfirmation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
         <ProvidersContainer>
           {children}
           <Navbar />
+          <DeleteAccountConfirmation />
           <div id="clerk-captcha" />
         </ProvidersContainer>
       </body>

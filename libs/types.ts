@@ -9,6 +9,8 @@ import type { OAuthStrategy } from "@clerk/shared/types"
 import z from "zod";
 import createPostSchema from "@/schemas/createPostSchema";
 import deleteAccountConfirmationSchema from "@/schemas/deleteAccountConfirmationSchema";
+import { InfiniteData } from "@tanstack/react-query";
+import { Post } from "@/app/generated/prisma/client";
 //SHADCN COMPONENTS
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: 'default' | 'outline'
@@ -47,6 +49,17 @@ export type OAuthButtonProps = {
     title: string
     strategy: OAuthStrategy
 }
+export type PostContainerProps = {
+    caption: string,
+    imgUrl: string
+}
+export type PostsWrapperProps = {
+    data: InfiniteData<{
+        posts: Post[],
+        nextPage: number | null
+    }>,
+
+}
 //INFERS
 export type UploadFormFields = z.infer<typeof uploadFormSchema>
 export type SignUpFields = z.infer<typeof signUpSchema>
@@ -71,4 +84,9 @@ export type SidebarStore = {
 export type DeleteAccountConfirmationStore = {
     enabled: boolean,
     setEnabled: (val: boolean) => void
+}
+//ACTION PROPS
+export type FetchPostFields = {
+    page: number,
+    limit: number
 }

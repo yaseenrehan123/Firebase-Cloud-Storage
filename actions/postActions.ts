@@ -1,5 +1,5 @@
 "use server";
-import { CreatePostFields } from "@/libs/types";
+import { CreatePostFields, FetchPostFields } from "@/libs/types";
 import prisma from "@/libs/prisma";
 
 export async function createPost(data: CreatePostFields) {
@@ -15,4 +15,28 @@ export async function createPost(data: CreatePostFields) {
     });
 
     console.log("POST CREATED: ", post);
+}
+export async function fetchPosts({ page, limit }: FetchPostFields) {
+    try {
+        const posts = await prisma.post.findMany({
+            skip: (page - 1) * limit,
+            take: limit + 1,
+            orderBy: {
+                createdAt: 'asc'
+            }
+        });
+        const hasMore = posts.length > limit;
+
+        if (hasMore) {
+            posts.pop();
+        }
+
+        const nextPage = hasMore ? page + 1 : null;
+
+        return { posts, nextPage }
+    }
+    catch (err) {
+        throw new Error((err as Error).message)
+    }
+
 }

@@ -109,6 +109,8 @@ const LoginForm = () => {
                 )}
             </div>
 
+            <div id="clerk-captcha" />
+
             {/* SUBMIT BUTTON */}
             <Button
                 className="flex items-center justify-center bg-neutral-900 py-3 px-5 rounded-[8px] w-36 border-2"

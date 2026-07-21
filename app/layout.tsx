@@ -35,7 +35,6 @@ export default function RootLayout({
           {children}
           <Navbar />
           <DeleteAccountConfirmation />
-          <div id="clerk-captcha" />
         </ProvidersContainer>
       </body>
     </html>

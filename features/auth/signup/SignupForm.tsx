@@ -116,6 +116,8 @@ const SignUpForm = () => {
                 {errors.confirmPassword && <Message variant="error" content={errors.confirmPassword.message} disableOnContent="never" />}
             </div >
 
+            <div id="clerk-captcha" />
+
             <Button className='flex items-center justify-center bg-neutral-900 py-3 px-5 
                 rounded-[8px] w-36 border-2 ' disabled={isSubmitting}>
                 <div className={isSubmitting ? "text-yellow-500" : "text-white"}>
